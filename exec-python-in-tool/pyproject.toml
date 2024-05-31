@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "exec-python-in-tool"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [
+    { include = "app" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+uvicorn = "^0.23.2"
+langserve = {extras = ["server"], version = ">=0.0.30"}
+pydantic = "<2"
+langchain-openai = "^0.1.8"
+langchain-community = "^0.2.1"
+langchain-google-genai = "^1.0.5"
+langgraph = "^0.0.59"
+langchain-anthropic = "^0.1.13"
+
+
+[tool.poetry.group.dev.dependencies]
+langchain-cli = ">=0.0.15"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
