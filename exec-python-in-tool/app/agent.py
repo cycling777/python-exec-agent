@@ -14,8 +14,8 @@ from langgraph.graph import MessageGraph
 from langgraph.prebuilt import ToolNode, tools_condition
 
 # llm = GoogleGenerativeAI(model="models/gemini-1.5-flash-latest", google_api_key=os.environ["GOOGLE_API_KEY"])
-# llm = ChatAnthropic(model="claude-3-haiku-20240307")
-llm = ChatOpenAI(model="gpt-4o")
+llm = ChatAnthropic(model="claude-3-haiku-20240307")
+# llm = ChatOpenAI(model="gpt-4o")
 tools = [get_now, create_and_edit_file, execute_python_file, poetry_command]
 
 graph_builder = MessageGraph()
