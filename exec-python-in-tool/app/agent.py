@@ -9,14 +9,14 @@ from datetime import datetime, timedelta, timezone
 from langgraph.prebuilt import create_react_agent
 from langchain_openai import ChatOpenAI
 from langchain_core.runnables import RunnableLambda
-from tools import execute_script
+from tools import get_now, create_and_edit_file, execute_python_file, poetry_command
 from langgraph.graph import MessageGraph
 from langgraph.prebuilt import ToolNode, tools_condition
 
 # llm = GoogleGenerativeAI(model="models/gemini-1.5-flash-latest", google_api_key=os.environ["GOOGLE_API_KEY"])
 # llm = ChatAnthropic(model="claude-3-haiku-20240307")
 llm = ChatOpenAI(model="gpt-4o")
-tools = [execute_script]
+tools = [get_now, create_and_edit_file, execute_python_file, poetry_command]
 
 graph_builder = MessageGraph()
 graph_builder.add_node("tools", ToolNode(tools))
@@ -29,16 +29,9 @@ exec_graph = graph_builder.compile()
 
 # 実行したいPythonコードを文字列として定義
 code = """
-import requests
+task: googleのホームページには何が書いてありますか？
 
-def access_google():
-    url = "https://www.google.com"
-    response = requests.get(url)
-    print("Status Code:", response.status_code)
-    print("Headers:", response.headers)
-    print("Content:", response.text[:500])  # 最初の500文字のみ表示
-
-access_google()
+toolを使って、必要ならばファイルを作成し、実行しながらタスクを達成してください。
 """
     
 if __name__ == "__main__":
